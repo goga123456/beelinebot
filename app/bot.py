@@ -1657,7 +1657,7 @@ def send_email():
     msg.attach(MIMEText(text, 'plain'))
     msg.attach(MIMEText(html, 'html', 'utf-8'))
         
-    filename='./example.xlsx'
+    filename='example.xlsx'
     fp=open(filename,'rb')
     att = email.mime.application.MIMEApplication(fp.read(),_subtype="xlsx")
     fp.close()
