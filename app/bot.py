@@ -294,7 +294,7 @@ def process_start(message):
     #Thread(target = schedule_checker).start()
     bot.register_next_step_handler(msg, ask_language)    
 
-@bot.message_handler(content_types = ['text'])
+"""@bot.message_handler(content_types = ['text'])
 def checker(message):
 
     print(message.text)
@@ -311,7 +311,7 @@ def checker(message):
         return                         
     else:
         print("in else")
-        bot.reply_to(message, "Выбери вариант кнопкой (Tugmani bosib variantni tanlang)")
+        bot.reply_to(message, "Выбери вариант кнопкой (Tugmani bosib variantni tanlang)")"""
 
 
 @bot.message_handler(content_types = ['text'])
