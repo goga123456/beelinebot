@@ -1,0 +1,1 @@
+web: gunicorn movarounahr_bot.wsgi –log-file -
