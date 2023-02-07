@@ -1657,7 +1657,7 @@ def send_email():
     msg.attach(MIMEText(text, 'plain'))
     msg.attach(MIMEText(html, 'html', 'utf-8'))
         
-    filename='отчёт.xlsx'
+    filename='example.xlsx'
     fp=open(filename,'rb')
     att = email.mime.application.MIMEApplication(fp.read(),_subtype="xlsx")
     fp.close()
@@ -1677,12 +1677,12 @@ def send_email():
 
 
 def clear_sheet():
-    fn = 'отчёт.xlsx'
+    fn = 'example.xlsx'
     wb=load_workbook(fn)
     ws=wb['Лист1']
     nb_row = ws.max_row
     ws.delete_rows(2, nb_row)
-    wb.save('отчёт.xlsx')
+    wb.save('example.xlsx')
         
 
 
