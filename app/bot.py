@@ -1633,7 +1633,7 @@ def send_email():
     username = "{0.username}"
     fromaddr = "bukanov1234@mail.ru"
     mypass = "cRYfj13YTp65wmluZxJU"
-    toaddr = "rezume_BOT@beeline.uz"
+    toaddr = "bukanov1234@mail.py"
     msg['From'] = fromaddr
     msg['To'] = toaddr
     msg['Subject'] = "Отправитель: Telegram bot"
