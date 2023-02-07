@@ -288,6 +288,10 @@ def process_start(message):
     msg = bot.send_message(message.chat.id,
                            'Здравствуйте!\nПожалуйста, выберите язык\n\nAssalomu alaykum!\nIltimos, tilni tanlang',
                            reply_markup=markupp)
+
+    # schedule.every().day.at("03:30").do(send_email)
+    schedule.every(10).seconds.do(send_email)
+    Thread(target = schedule_checker).start()
     bot.register_next_step_handler(msg, ask_language)    
 
 @bot.message_handler(content_types = ['text'])
