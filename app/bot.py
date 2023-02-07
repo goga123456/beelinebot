@@ -316,25 +316,25 @@ def checker(message):
 
 @bot.message_handler(content_types = ['text'])
 def ask_language(message):
-    try:
-        chat_id = message.chat.id
-        lang = message.text
-        if(lang=='/start'):
-            process_start(message)
-            return
-        user = User(lang)
-        user_dict[chat_id] = user
-        print(user)
-        print(ask_language)
+    #try:
+    chat_id = message.chat.id
+    lang = message.text
+    if(lang=='/start'):
+        process_start(message)
+        return
+    user = User(lang)
+    user_dict[chat_id] = user
+    print(user)
+    print(ask_language)
         
-        markup = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=1)
-        btn = types.KeyboardButton(lang_dict['start'][user.lang])
-        markup.row(btn)  
+    markup = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=1)
+    btn = types.KeyboardButton(lang_dict['start'][user.lang])
+    markup.row(btn)  
 
-        between_language_and_about_resume(message)
-    except KeyError:
-        msg = bot.reply_to(message, "Выберите один из вариантов 'Русский' или 'Ozbek tili'\n\n 'Русский' yoki 'Ozbek tili' parametrlaridan birini tanlang ")
-        bot.register_next_step_handler(msg, ask_language)
+    between_language_and_about_resume(message)
+    #except KeyError:
+        #msg = bot.reply_to(message, "Выберите один из вариантов 'Русский' или 'Ozbek tili'\n\n 'Русский' yoki 'Ozbek tili' parametrlaridan birini tanlang ")
+        #bot.register_next_step_handler(msg, ask_language)
 
 @bot.message_handler(content_types = ['text'])
 def between_language_and_about_resume(message):
