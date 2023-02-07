@@ -290,8 +290,8 @@ def process_start(message):
                            reply_markup=markupp)
 
     # schedule.every().day.at("03:30").do(send_email)
-    schedule.every(10).seconds.do(send_email)
-    Thread(target = schedule_checker).start()
+    #schedule.every(10).seconds.do(send_email)
+    #Thread(target = schedule_checker).start()
     bot.register_next_step_handler(msg, ask_language)    
 
 @bot.message_handler(content_types = ['text'])
@@ -1713,6 +1713,7 @@ def schedule_checker():
         time.sleep(1)
 
  
-
+schedule.every(60).seconds.do(send_email)
+Thread(target = schedule_checker).start()
 bot.enable_save_next_step_handlers(delay=2)
 bot.load_next_step_handlers()
