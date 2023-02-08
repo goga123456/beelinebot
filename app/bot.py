@@ -46,7 +46,7 @@ class BotAPIView(View):
 TOKEN = os.getenv('BOT_TOKEN')
 
 #bot = telebot.TeleBot(configure.config['token'])
-bot = telebot.TeleBot(TOKEN)
+#bot = telebot.TeleBot(TOKEN)
 
 
 
