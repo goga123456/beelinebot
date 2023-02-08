@@ -32,7 +32,7 @@ logger = telebot.logger
 telebot.logger.setLevel(logging.DEBUG)
 
 BOT_NAME = '@ProductUzBot'
-#bot = telebot.TeleBot('5875923517:AAHdupc3iddCYl-5XYQj79ZeCeU80cx28XU')
+bot = telebot.TeleBot('5875923517:AAHdupc3iddCYl-5XYQj79ZeCeU80cx28XU')
 
 
 
