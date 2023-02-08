@@ -328,7 +328,7 @@ def ask_language(message):
     print(ask_language)
     print(user.lang)    
     markup = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=1)
-    btn = types.KeyboardButton(lang_dict['start'][user.lang])
+    btn = types.KeyboardButton(user.lang)
     markup.row(btn)  
 
     between_language_and_about_resume(message)
