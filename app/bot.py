@@ -34,7 +34,8 @@ telebot.logger.setLevel(logging.DEBUG)
 BOT_NAME = '@ProductUzBot'
 bot = telebot.TeleBot('5875923517:AAHdupc3iddCYl-5XYQj79ZeCeU80cx28XU')
 
-
+bot.enable_save_next_step_handlers(delay=2)
+bot.load_next_step_handlers()
 
 class BotAPIView(View):
     def post(self, request):
@@ -1716,5 +1717,5 @@ def schedule_checker():
  
 #schedule.every(60).seconds.do(send_email)
 #Thread(target = schedule_checker).start()
-bot.enable_save_next_step_handlers(delay=2)
-bot.load_next_step_handlers()
+# bot.enable_save_next_step_handlers(delay=2)
+# bot.load_next_step_handlers()
