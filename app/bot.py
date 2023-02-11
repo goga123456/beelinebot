@@ -326,6 +326,7 @@ def ask_language(message):
     user_dict[chat_id] = user
     print(user)
     print(ask_language)
+    print(lang_dict['start'][user.lang])
     print(user.lang)    
     markup = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=1)
     btn = types.KeyboardButton(lang_dict['start'][user.lang])
