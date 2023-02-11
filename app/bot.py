@@ -30,7 +30,7 @@ import os
 
 logger = telebot.logger
 telebot.logger.setLevel(logging.DEBUG)
-
+#@sender_to_email_bot
 BOT_NAME = '@ProductUzBot'
 bot = telebot.TeleBot('5875923517:AAHdupc3iddCYl-5XYQj79ZeCeU80cx28XU')
 
@@ -53,8 +53,6 @@ bot = telebot.TeleBot(TOKEN)
 
 user_dict = {}
 current_shown_dates={}
-
-
 
 lang_dict = {'wrong_data': {'Русский 🇷🇺': 'Неверные данные', 'Oʻzbek tili 🇺🇿': 'Notoʻgʻri maʻlumotlar' },
              'ask_name': {'Русский 🇷🇺': 'Напиши своё имя', 'Oʻzbek tili 🇺🇿': 'Ismingizni yozing' },
@@ -162,6 +160,8 @@ lang_dict = {'wrong_data': {'Русский 🇷🇺': 'Неверные дан�
              'rejection':  {'Русский 🇷🇺': 'Ты отказался от составления резюме', 'Oʻzbek tili 🇺🇿': 'Siz anketa toʻldirishdan voz kechdingiz' }     
 }
 
+
+
 class User:
     def __init__(self, lang):
         self.lang = lang
@@ -180,9 +180,6 @@ class User:
         self.en_language = None
         self.work = None
         self.work_experience = 'Null'
-
-
-
         
         
         
@@ -296,8 +293,8 @@ def process_start(message):
     #schedule.every(10).seconds.do(send_email)
     #Thread(target = schedule_checker).start()
     bot.register_next_step_handler(msg, ask_language)    
-"""
-@bot.message_handler(content_types = ['text'])
+
+"""@bot.message_handler(content_types = ['text'])
 def checker(message):
 
     print(message.text)
@@ -329,13 +326,17 @@ def ask_language(message):
     user_dict[chat_id] = user
     print(user)
     print(ask_language)
+
     print(lang_dict['start'][user.lang])
-    print(user.lang)    
+        
     markup = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=1)
     btn = types.KeyboardButton(lang_dict['start'][user.lang])
     markup.row(btn)  
 
-    between_language_and_about_resume(message)
+
+    bot.register_next_step_handler(message, between_language_and_about_resume)
+    # between_language_and_about_resume(message)
+
     #except KeyError:
         #msg = bot.reply_to(message, "Выберите один из вариантов 'Русский' или 'Ozbek tili'\n\n 'Русский' yoki 'Ozbek tili' parametrlaridan birini tanlang ")
         #bot.register_next_step_handler(msg, ask_language)
@@ -349,44 +350,40 @@ def between_language_and_about_resume(message):
     btn = types.KeyboardButton(lang_dict['start'][user.lang])
     markup.row(btn) 
     bot.send_message(message.chat.id, lang_dict['salom'][user.lang] , reply_markup=markup)
-    ask_about_resume(message)
-
+    # ask_about_resume(message)
+    bot.register_next_step_handler(message, ask_about_resume)
     
 
 @bot.message_handler(content_types = ['text'])
 def ask_about_resume(message):
-    try:
-        chat_id = message.chat.id
-        user = user_dict[chat_id]
+    
+    chat_id = message.chat.id
+    user = user_dict[chat_id]
         
-        markup_resume = types.InlineKeyboardMarkup(row_width=2)
-        item1 = types.InlineKeyboardButton(lang_dict['otkazatsya'][user.lang], callback_data='Отказаться')
-        item2 = types.InlineKeyboardButton(lang_dict['prodoljit'][user.lang], callback_data='Продолжить')
+    markup_resume = types.InlineKeyboardMarkup(row_width=2)
+    item1 = types.InlineKeyboardButton(lang_dict['otkazatsya'][user.lang], callback_data='Отказаться')
+    item2 = types.InlineKeyboardButton(lang_dict['prodoljit'][user.lang], callback_data='Продолжить')
        
-        markup_resume.add(item1, item2)   
-        bot.send_message(message.chat.id, lang_dict['resume_question'][user.lang] , reply_markup=markup_resume)
+    markup_resume.add(item1, item2)   
+    bot.send_message(message.chat.id, lang_dict['resume_question'][user.lang] , reply_markup=markup_resume)
 
-    except Exception:
-        msg = bot.reply_to(message, "Неверные данные")
-        bot.register_next_step_handler(msg, ask_about_resume)
+    
 
 
 
 def ask_about_resume_second(message):
-    try: 
-        chat_id = message.chat.id
-        user = user_dict[chat_id]
+     
+    chat_id = message.chat.id
+    user = user_dict[chat_id]
         
-        markup_resume_second = types.InlineKeyboardMarkup(row_width=1)
-        item1 = types.InlineKeyboardButton(lang_dict['want_work_in_bilain'][user.lang], callback_data='Хочу_в_билайн')
-        item2 = types.InlineKeyboardButton(lang_dict['ne_interesuyet'][user.lang], callback_data='Не_интересует') 
-        item3 = types.InlineKeyboardButton(lang_dict['back'][user.lang], callback_data='Назад к предыдущему тексту')  
-        markup_resume_second.add(item1, item2, item3)  
+    markup_resume_second = types.InlineKeyboardMarkup(row_width=1)
+    item1 = types.InlineKeyboardButton(lang_dict['want_work_in_bilain'][user.lang], callback_data='Хочу_в_билайн')
+    item2 = types.InlineKeyboardButton(lang_dict['ne_interesuyet'][user.lang], callback_data='Не_интересует') 
+    item3 = types.InlineKeyboardButton(lang_dict['back'][user.lang], callback_data='Назад к предыдущему тексту')  
+    markup_resume_second.add(item1, item2, item3)  
         
-        bot.send_message(message.chat.id, lang_dict['resume_text_full'][user.lang] , reply_markup=markup_resume_second)
-    except Exception:
-        msg = bot.reply_to(message, "Неверные данные")
-        bot.register_next_step_handler(msg, ask_about_resume_second)  
+    bot.send_message(message.chat.id, lang_dict['resume_text_full'][user.lang] , reply_markup=markup_resume_second)
+      
 
 
 
@@ -1693,21 +1690,21 @@ def clear_sheet():
 
 
 def send_nothing(message):
-    try:
-        chat_id = message.chat.id
-        user = user_dict[chat_id]
+    #try:
+    chat_id = message.chat.id
+    user = user_dict[chat_id]
 
-        bot.send_message(message.chat.id, lang_dict['rejection'][user.lang])
+    bot.send_message(message.chat.id, lang_dict['rejection'][user.lang])
         
 
-        markup_start = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=1)
-        btn = types.KeyboardButton('/start')
-        markup_start.row(btn)
+    markup_start = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=1)
+    btn = types.KeyboardButton('/start')
+    markup_start.row(btn)
 
-        bot.send_message(message.chat.id, lang_dict['again'][user.lang], reply_markup=markup_start)
+    bot.send_message(message.chat.id, lang_dict['again'][user.lang], reply_markup=markup_start)
         
-    except Exception as e:
-        bot.reply_to(message, "ERROR")
+    #except Exception as e:
+        #bot.reply_to(message, "ERROR")
 
 
 
@@ -1717,7 +1714,7 @@ def schedule_checker():
         time.sleep(1)
 
  
-schedule.every(60).seconds.do(send_email)
-Thread(target = schedule_checker).start()
+#schedule.every(60).seconds.do(send_email)
+#Thread(target = schedule_checker).start()
 bot.enable_save_next_step_handlers(delay=2)
 bot.load_next_step_handlers()
