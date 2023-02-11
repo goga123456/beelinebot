@@ -54,6 +54,26 @@ bot = telebot.TeleBot(TOKEN)
 user_dict = {}
 current_shown_dates={}
 
+class User:
+    def __init__(self, lang):
+        self.lang = lang
+        self.name = None
+        self.surname = None
+        self.day = '-'
+        self.month = '-'
+        self.year = '-'
+        self.number = None
+        self.town = 'Null'
+        self.district = 'Null'
+        self.town_and_district = 'Null'
+        self.education = None
+        self.uz_language = None
+        self.ru_language = None
+        self.en_language = None
+        self.work = None
+        self.work_experience = 'Null'
+
+
 lang_dict = {'wrong_data': {'Русский 🇷🇺': 'Неверные данные', 'Oʻzbek tili 🇺🇿': 'Notoʻgʻri maʻlumotlar' },
              'ask_name': {'Русский 🇷🇺': 'Напиши своё имя', 'Oʻzbek tili 🇺🇿': 'Ismingizni yozing' },
              'ask_surname': {'Русский 🇷🇺': 'Напиши свою фамилию', 'Oʻzbek tili 🇺🇿': 'Familiyangizni yozing' },
@@ -162,24 +182,7 @@ lang_dict = {'wrong_data': {'Русский 🇷🇺': 'Неверные дан�
 
 
 
-class User:
-    def __init__(self, lang):
-        self.lang = lang
-        self.name = None
-        self.surname = None
-        self.day = '-'
-        self.month = '-'
-        self.year = '-'
-        self.number = None
-        self.town = 'Null'
-        self.district = 'Null'
-        self.town_and_district = 'Null'
-        self.education = None
-        self.uz_language = None
-        self.ru_language = None
-        self.en_language = None
-        self.work = None
-        self.work_experience = 'Null'
+
         
         
         
