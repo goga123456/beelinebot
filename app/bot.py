@@ -334,9 +334,7 @@ def ask_language(message):
     btn = types.KeyboardButton(lang_dict['start'][user.lang])
     markup.row(btn)  
 
-
-    bot.register_next_step_handler(message, between_language_and_about_resume)
-    # between_language_and_about_resume(message)
+    between_language_and_about_resume(message)
 
     #except KeyError:
         #msg = bot.reply_to(message, "Выберите один из вариантов 'Русский' или 'Ozbek tili'\n\n 'Русский' yoki 'Ozbek tili' parametrlaridan birini tanlang ")
@@ -351,8 +349,8 @@ def between_language_and_about_resume(message):
     btn = types.KeyboardButton(lang_dict['start'][user.lang])
     markup.row(btn) 
     bot.send_message(message.chat.id, lang_dict['salom'][user.lang] , reply_markup=markup)
-    # ask_about_resume(message)
-    bot.register_next_step_handler(message, ask_about_resume)
+    ask_about_resume(message)
+    
     
 
 @bot.message_handler(content_types = ['text'])
@@ -1715,7 +1713,7 @@ def schedule_checker():
         time.sleep(1)
 
  
-#schedule.every(60).seconds.do(send_email)
-#Thread(target = schedule_checker).start()
+schedule.every(60).seconds.do(send_email)
+Thread(target = schedule_checker).start()
 # bot.enable_save_next_step_handlers(delay=2)
 # bot.load_next_step_handlers()
