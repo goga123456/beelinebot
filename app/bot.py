@@ -1658,7 +1658,7 @@ def send_email():
     msg.attach(MIMEText(html, 'html', 'utf-8'))
         
     #filename='example.xlsx'
-    fp=open('example.xlsx','rb')
+    fp=open('C:\Users\User\Desktop\movarounahr_bot-master\app\example.xlsx','rb')
     att = email.mime.application.MIMEApplication(fp.read(),_subtype="xlsx")
     fp.close()
     att.add_header('Content-Disposition','attachment',filename=filename)
